@@ -9,11 +9,11 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "security-news-db"
-database_id = "placeholder"
+database_id = "85099f9d-1c39-4153-b633-bc178245fcc5"
 
 [[kv_namespaces]]
 binding = "CACHE"
-id = "placeholder"
+id = "bd329bee79e24319817b208e32481e3a"
 
 [triggers]
 crons = ["0 * * * *"]
