@@ -126,10 +126,6 @@ app.post('/api/digest/send', async (c) => {
 
 // ── Seed default sources ───────────────────────────────────────────────────
 app.post('/api/seed', async (c) => {
-  const existing = await getSources(c.env.DB);
-  if (existing.length > 0) {
-    return c.json({ message: 'Sources already seeded', count: existing.length });
-  }
   for (const def of DEFAULT_SOURCES) {
     const id = `src_${def.name.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
     await upsertSource(c.env.DB, { ...def, id, enabled: true });
