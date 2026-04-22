@@ -1,0 +1,19 @@
+name = "security-news-aggregator"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "security-news-db"
+database_id = "placeholder"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "placeholder"
+
+[triggers]
+crons = ["0 * * * *"]

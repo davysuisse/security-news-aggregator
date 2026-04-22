@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecNews — Security Intelligence Aggregator</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">SecNews</span>
+      </div>
+      <div class="header-stats" id="stats-bar">
+        <span class="stat-pill" id="stat-total">— items</span>
+        <span class="stat-pill high" id="stat-high">— HIGH</span>
+        <span class="stat-pill medium" id="stat-medium">— MED</span>
+        <span class="stat-pill low" id="stat-low">— LOW</span>
+        <span class="stat-pill" id="stat-sources">— sources</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="btn-sources" title="Manage Sources">Sources</button>
+        <button class="btn btn-ghost" id="btn-digest">Digest</button>
+        <button class="btn btn-primary" id="btn-ingest">↻ Ingest</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <section class="filter-section">
+          <div class="filter-label">Signal</div>
+          <label class="filter-option">
+            <input type="radio" name="signal" value="" checked /> All
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="signal" value="HIGH" />
+            <span class="badge high">HIGH</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="signal" value="MEDIUM" />
+            <span class="badge medium">MED</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="signal" value="LOW" />
+            <span class="badge low">LOW</span>
+          </label>
+        </section>
+
+        <section class="filter-section">
+          <div class="filter-label">Domain</div>
+          <label class="filter-option">
+            <input type="radio" name="domain" value="" checked /> All
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="domain" value="AppSec" />
+            <span class="badge appsec">AppSec</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="domain" value="IAM" />
+            <span class="badge iam">IAM</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="domain" value="SecChampion" />
+            <span class="badge secchamp">SecChampion</span>
+          </label>
+        </section>
+
+        <section class="filter-section">
+          <div class="filter-label">Search</div>
+          <input type="text" id="search-input" class="search-box" placeholder="Keywords…" />
+        </section>
+
+        <section class="filter-section">
+          <div class="filter-label">Actions</div>
+          <button class="btn btn-ghost sidebar-btn" id="btn-enrich">⚡ Enrich pending</button>
+          <button class="btn btn-ghost sidebar-btn" id="btn-seed">⬡ Seed sources</button>
+        </section>
+      </aside>
+
+      <!-- Feed -->
+      <main class="feed" id="feed">
+        <div class="loading" id="feed-loading">Loading intelligence feed…</div>
+        <div id="feed-list"></div>
+        <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+          <button class="btn btn-ghost" id="btn-load-more">Load more</button>
+        </div>
+      </main>
+
+      <!-- Detail Panel -->
+      <aside class="detail-panel" id="detail-panel" style="display:none">
+        <button class="detail-close" id="detail-close">✕</button>
+        <div id="detail-content"></div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Sources Modal -->
+  <div class="modal-overlay" id="sources-modal" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Manage Sources</h2>
+        <button class="modal-close" id="sources-modal-close">✕</button>
+      </div>
+      <div id="sources-list" class="sources-list"></div>
+      <div class="modal-footer">
+        <h3>Add Source</h3>
+        <div class="add-source-form">
+          <input type="text" id="new-source-name" placeholder="Name" class="form-input" />
+          <input type="text" id="new-source-feed" placeholder="Feed URL" class="form-input" />
+          <select id="new-source-type" class="form-input">
+            <option value="rss">RSS</option>
+            <option value="atom">Atom</option>
+          </select>
+          <button class="btn btn-primary" id="btn-add-source">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Digest Modal -->
+  <div class="modal-overlay" id="digest-modal" style="display:none">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2>Weekly Digest</h2>
+        <div class="modal-header-actions">
+          <button class="btn btn-ghost" id="btn-send-digest">Send to Slack</button>
+          <button class="modal-close" id="digest-modal-close">✕</button>
+        </div>
+      </div>
+      <div id="digest-content" class="digest-content"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
