@@ -68,7 +68,6 @@ export interface RawFeedItem {
 export interface Env {
   DB: D1Database;
   CACHE: KVNamespace;
-  ASSETS: Fetcher;
   ANTHROPIC_API_KEY: string;
   SLACK_WEBHOOK_URL?: string;
 }
